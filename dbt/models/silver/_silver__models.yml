@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: location
+    description: "Dimensão geográfica"
+    columns:
+      - name: city_id
+        description: "Chave primária da tabela"
+        data_tests:
+          - unique
+          - not_null
+  - name: account_customers
+    description: "Dimensão conta e usuário"
+    columns:
+      - name: city_id
+        description: "Chave primária da tabela"
+        data_tests:
+          - relationships:
+              to: ref('location')
+              field: city_id
+      - name: account_status
+        description: "Flag cliente ativo ou inativo"    
+        data_tests:
+          - accepted_values:
+              values: ['active', 'inactive']
